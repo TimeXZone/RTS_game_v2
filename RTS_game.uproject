@@ -8,7 +8,10 @@
 		{
 			"Name": "RTS_game",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
 		}
 	]
 }

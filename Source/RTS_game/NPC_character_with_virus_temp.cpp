@@ -72,7 +72,11 @@ int ANPC_character_with_virus_temp::check_func(float percent, int db)
 void ANPC_character_with_virus_temp::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	vir_bio.set_time_worsen(10);							//设置各个private值
+	vir_bio.set_death_percent(99);
+	vir_bio.set_heavy_percent(80);
+	vir_bio.set_infect_percent(50);
+	vir_bio.set_infect_radius(20);
 }
 
 // Called every frame
