@@ -68,6 +68,8 @@ int ANPC_character_with_virus_temp::check_func(float percent, int db)
 	return -1;//³ö´í¼´Îª-1
 }
 
+
+
 // Called when the game starts or when spawned
 void ANPC_character_with_virus_temp::BeginPlay()
 {

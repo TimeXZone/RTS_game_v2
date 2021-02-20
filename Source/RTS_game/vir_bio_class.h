@@ -17,6 +17,7 @@ private:
 	float infect_percent;//感染率
 	float infect_radius;//感染半径
 public:
+	vir_bio_class(float a, float b, float c, float d, float e);
 	void set_time_worsen(float num);							//设置各个private值
 	void set_death_percent(float num);
 	void set_heavy_percent(float num);

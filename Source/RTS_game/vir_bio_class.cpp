@@ -1,5 +1,14 @@
 #include "vir_bio_class.h"
 
+vir_bio_class::vir_bio_class(float a, float b, float c, float d, float e)
+{
+	time_worsen = a;
+	death_percent = b;
+	heavy_percent = c;
+	infect_percent = d;
+	infect_radius = e;
+}
+
 void vir_bio_class::set_time_worsen(float num)
 {
 	time_worsen = num;
