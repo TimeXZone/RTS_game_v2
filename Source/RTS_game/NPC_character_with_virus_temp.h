@@ -14,6 +14,7 @@ class RTS_GAME_API ANPC_character_with_virus_temp : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ANPC_character_with_virus_temp();	
+	vir_bio_class vir_bio;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category = status)
 	int infect_status; //默认0为未发病，1为轻症，2为中症，3为重症，4为死亡
 	//UPROPERTY(BlueprintCallable,Category = "MyFunc")

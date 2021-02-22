@@ -35,7 +35,7 @@ void AGamePlay_Actor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	count++;
-	if (count%increase_rate)
+	if (count%increase_rate==0)
 	{
 		policy_point++;
 		count = 0;
