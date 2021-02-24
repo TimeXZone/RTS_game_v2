@@ -21,7 +21,7 @@ public:
 	float show_time_worsen();
 	UFUNCTION(BlueprintCallable, Category = MyFunc)
 	int check_func(float percent, int db);//percent 概率 即病毒自带的各项几率   db奖励/惩罚骰（即政策树加成，不以百分比判定了)  coc7版规则 0大成功 1成功 2失败 3大失败
-	
+	vir_bio_class vir_bio;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
