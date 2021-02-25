@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "Windows/AllowWindowsPlatformTypes.h"
 #include "Windows/PreWindowsApi.h"
+#include "NPC_character_with_virus_temp.h"
 #include <windows.h>
 #include <cstdlib>
-#include "NPC_character_with_virus_temp.h"
 #include "Windows/PostWindowsApi.h"
 #include "Windows/HideWindowsPlatformTypes.h"
 // Sets default values
@@ -68,15 +68,21 @@ int ANPC_character_with_virus_temp::check_func(float percent, int db)
 	return -1;//出错即为-1
 }
 
+bool ANPC_character_with_virus_temp::vir_bio_init(float time_worsen, float death_percent, float heavy_percent, float infect_percent, float infect_radius)
+{
+	vir_bio.set_time_worsen(time_worsen);							//设置各个private值
+	vir_bio.set_death_percent(death_percent);
+	vir_bio.set_heavy_percent(heavy_percent);
+	vir_bio.set_infect_percent(infect_percent);
+	vir_bio.set_infect_radius(infect_radius);
+	return true;
+}
+
 // Called when the game starts or when spawned
 void ANPC_character_with_virus_temp::BeginPlay()
 {
 	Super::BeginPlay();
-	vir_bio.set_time_worsen(10);							//设置各个private值
-	vir_bio.set_death_percent(99);
-	vir_bio.set_heavy_percent(80);
-	vir_bio.set_infect_percent(50);
-	vir_bio.set_infect_radius(20);
+	
 }
 
 // Called every frame
