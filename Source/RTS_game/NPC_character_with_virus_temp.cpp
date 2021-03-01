@@ -14,9 +14,15 @@ ANPC_character_with_virus_temp::ANPC_character_with_virus_temp()
 
 }
 
-float ANPC_character_with_virus_temp::show_time_worsen()
+
+
+void ANPC_character_with_virus_temp::show_npc_state(float& time_worsen, float& death_percent, float& heavy_percent, float& infect_percent, float& infect_radius)
 {
-	return 0.0f;
+	time_worsen = vir_bio.show_time_worsen();
+	death_percent = vir_bio.show_death_percent();
+	heavy_percent = vir_bio.show_heavy_percent();
+	infect_percent = vir_bio.show_infect_percent();
+	infect_radius = vir_bio.show_infect_radius();
 }
 
 int ANPC_character_with_virus_temp::check_func(float percent, int db)
@@ -78,6 +84,23 @@ bool ANPC_character_with_virus_temp::vir_bio_init(float time_worsen, float death
 	return true;
 }
 
+void ANPC_character_with_virus_temp::switch_func(int sgn, bool& success, bool& huge_success, bool& fail, bool& huge_fail)
+{
+	success = 0;
+	huge_success = 0;
+	fail = 0;
+	huge_fail = 0;
+	switch (sgn)
+	{
+	case 0:huge_success = 1; break;
+	case 1:success = 1; break;
+	case 2:fail = 1; break;
+	case 3:huge_fail = 1; break;
+	default:
+		break;
+	}
+}
+
 // Called when the game starts or when spawned
 void ANPC_character_with_virus_temp::BeginPlay()
 {
@@ -89,7 +112,7 @@ void ANPC_character_with_virus_temp::BeginPlay()
 void ANPC_character_with_virus_temp::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 }
 
 // Called to bind functionality to input
