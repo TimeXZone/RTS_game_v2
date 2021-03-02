@@ -18,7 +18,7 @@ public:
 	int infect_status; //默认0为未发病，1为轻症，2为中症，3为重症，4为死亡
 	//UPROPERTY(BlueprintCallable,Category = "MyFunc")
 	UFUNCTION(BlueprintCallable, Category = MyFunc)
-	float show_time_worsen();
+	void show_npc_state(float& time_worsen, float& death_percent, float& heavy_percent, float& infect_percent, float& infect_radius);
 	UFUNCTION(BlueprintCallable, Category = MyFunc)
 	int check_func(float percent, int db);//percent 概率 即病毒自带的各项几率   db奖励/惩罚骰（即政策树加成，不以百分比判定了)  coc7版规则 0大成功 1成功 2失败 3大失败
 	vir_bio_class vir_bio;
@@ -26,7 +26,8 @@ public:
 	bool vir_bio_init(float time_worsen, float death_percent, float heavy_percent, float infect_percent, float infect_radius);//infect_radius为中感染距离极限位置
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = infect)
 	float infect_radius = vir_bio.show_infect_radius();
-
+	UFUNCTION(BlueprintCallable, Category = MyFunc)
+	void switch_func(int sgn, bool& success, bool& huge_success, bool& fail, bool& huge_fail);
 
 
 protected:
