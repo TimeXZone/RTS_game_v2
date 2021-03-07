@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html style="overflow:hidden;overflow-y:hidden">
+<head>
+    <title>ECharts 关系图</title>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+	<script src="js/window.js"></script>
+<style>
+body{
+    background-color:rgba(0,0,0,0); //网页背景颜色
+    overflow:hidden;  //隐藏滑条
+}
+</style>
+</head>
+
+<body>
+
+<div align="center">
+
+<div  id="main" style="height:720px;width:1280px;"></div> </div>
+<script type="text/javascript">
+	var txt = document.getElementById("main");
+    txt.style.textAlign="left"; //left,center,right这里设置
+//findDimensions();
+//调用函数，获取屏幕尺寸数值
+//window.onresize=findDimensions;
+    var myChart = echarts.init(document.getElementById('main'),null,{myOpts_:{draggableFixed_:true}});
+    var categories = [
+	{name:"病毒"},
+	{name:"细菌"},
+	{name:"英文名称"},
+	{name:"类型"},
+	{name:"危害程度分类"},
+	{name:"病毒培养所需生物安全级别"},
+	{name:"动物实验所需生物安全级别"},
+	{name:"未经培养的感染材料的操作"},
+	{name:"运输包装分类"},
+	{name:"同义词"},
+	{name:"自然宿主"},
+	{name:"中间宿主"},
+	{name:"感染剂量"},
+	{name:"传播途径"},
+	{name:"潜伏期"},
+	{name:"传染性"},
+	{name:"是否人兽共患病"},
+	{name:"药物敏感性"},
+	{name:"耐药性"},
+	{name:"消毒剂敏感性"},
+	{name:"物理灭活性"},
+	{name:"紧急治疗"},
+	{name:"免疫接种"},
+	{name:"获得性感染事件记录"},
+	{name:"参考书籍"},
+	{name:"生物学特性"},
+	{name:"致病性"},
+	{name:"流行病学"},
+	{name:"宿主范围"},
+	{name:"宿主外存活性"},
+	{name:"基因组信息"},
+	{name:"灭活材料的操作"},
+	{name:"分类学地位"},
+	{name:"终末宿主"}];
+    option = {
+        // 图的标题
+        title: {
+        },
+        // 提示框的配置
+        tooltip: {
+            formatter: function (x) {
+                return x.data.des;
+            }
+        },
+        // 工具箱
+        toolbox: {
+            // 显示工具箱
+            show: true,
+			 orient: 'vertical',
+	// 2、竖向居中
+    top: 'center',
+    // 3、鼠标悬浮时，提示文字位于图标左边
+    emphasis: {
+      iconStyle: {
+        textPosition:'left'
+      }
+    },
+            feature: {
+                mark: {
+                    show: true
+                },
+                // 还原
+                restore: {
+                    show: true
+                },
+                // 保存为图片
+                saveAsImage: {
+                    show: true
+                }
+            }
+        },
+        legend: [{
+            // selectedMode: 'single',
+            data: categories.map(function (a) {
+                return a.name;
+            })
+        }],
+        series: [{
+            type: 'graph', // 类型:关系图
+            layout: 'force', //图的布局，类型为力导图
+            symbolSize: 40, // 调整节点的大小
+            roam: true, // 是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移,可以设置成 'scale' 或者 'move'。设置成 true 为都开启
+            edgeSymbol: ['circle', 'circle'],
+            edgeSymbolSize: 1,
+            edgeLabel: {
+                normal: {
+					show:false
+                }
+            },
+            force: {
+                repulsion: 50,
+				gravity: 0.1,
+                edgeLength: [10, 50]
+            },
+			focusNodeAdjacency : true,
+            draggable: true,
+            lineStyle: {
+                normal: {
+                    width: 1,
+                    color: '#4b565b',
+                }
+            },
+            edgeLabel: {
+                normal: {
+                    show: false,
+                    formatter: function (x) {
+                        return x.data.name;
+                    }
+                }
+            },
+            label: {
+                normal: {
+                    show: true,
+                    formatter: function(value) {
+                                 var res = value.data.name;
+                                if(res.length > 5) {
+                                     res = res.substring(0, 4) + "..";
+                                 }
+                                 return res;
+                             }
+                }
+            },
+ 
+            // 数据
+
+data:[
+{
+id:"0",
+name:'病毒',
+des:'病毒',
+symbolSize:150,
+category:0,
+},
+{
+id:"1",
+name:'细菌、放线菌、螺旋体等',
+des:'细菌、放线菌、螺旋体等',
+symbolSize:150,
+category:1,
+},
+{
+id:"2",
+name:'类天花病毒',
+symbolSize:70,
+category:0,
+des:'病毒:类天花病毒',
+},
+{
+id:"3",
+name:'Alastrimvirus',
+symbolSize:30,
+category:2,
+des:'英文名称:Alastrimvirus',
+},
+{
+id:"5",
+name:'第一类',
+symbolSize:30,
+category:4,
+des:'危害程度分类:第一类',
+},
+{
+id:"6",
+name:'BSL-4',
+symbolSize:30,
+category:5,
+des:'病毒培养所需生物安全级别:BSL-4',
+},
+{
+id:"7",
+name:'ABSL-4',
+symbolSize:30,
+category:6,
+des:'动物实验所需生物安全级别:ABSL-4',
+},
+{
+id:"8",
+name:'BSL-3',
+symbolSize:30,
+category:7,
+des:'未经培养的感染材料的操作:BSL-3',
+},
+{
+id:"9",
+name:'A/UN2814',
+symbolSize:30,
+category:8,
+des:'运输包装分类:A/UN2814',
+},
+{
+id:"32",
+name:'BSL-2',
+symbolSize:30,
+category:31,
+des:'灭活材料的操作:BSL-2',
+},
+{
+id:"33",
+name:'痘病毒科',
+symbolSize:30,
+category:32,
+des:'分类学地位:痘病毒科',
+},
+{
+id:"35",
+name:'东方马脑炎病毒',
+symbolSize:70,
+category:0,
+des:'病毒:东方马脑炎病毒',
+},
+{
+id:"36",
+name:'Easternequineencephalitisvirus',
+symbolSize:30,
+category:2,
+des:'英文名称:Easternequineencephalitisvirus',
+},
+{
+id:"38",
+name:'第一类',
+symbolSize:30,
+category:4,
+des:'危害程度分类:第一类',
+},
+{
+id:"39",
+name:'BSL-3',
+symbolSize:30,
+category:5,
+des:'病毒培养所需生物安全级别:BSL-3',
+},
+{
+id:"40",
+name:'ABSL-3',
+symbolSize:30,
+category:6,
+des:'动物实验所需生物安全级别:ABSL-3',
+},
+{
+id:"41",
+name:'BSL-3',
+symbolSize:30,
+category:7,
+des:'未经培养的感染材料的操作:BSL-3',
+},
+{
+id:"42",
+name:'A/UN2814',
+symbolSize:30,
+category:8,
+des:'运输包装分类:A/UN2814',
+},
+{
+id:"43",
+name:'东方马脑炎，东方马脑脊髓炎',
+symbolSize:30,
+category:9,
+des:'同义词:东方马脑炎，东方马脑脊髓炎',
+},
+{
+id:"44",
+name:'鸟类',
+symbolSize:30,
+category:10,
+des:'自然宿主:鸟类',
+},
+{
+id:"45",
+name:'蚊',
+symbolSize:30,
+category:11,
+des:'中间宿主:蚊',
+},
+{
+id:"46",
+name:'未知',
+symbolSize:30,
+category:12,
+des:'感染剂量:未知',
+},
+{
+id:"47",
+name:'东方马脑炎病毒通过蚊虫叮咬传播，呈蚊——鸟传播方式。',
+symbolSize:30,
+category:13,
+des:'传播途径:东方马脑炎病毒通过蚊虫叮咬传播，呈蚊——鸟传播方式。',
+},
+{
+id:"48",
+name:'一般7~10天',
+symbolSize:30,
+category:14,
+des:'潜伏期:一般7~10天',
+},
+{
+id:"49",
+name:'无人与人之间直接传播，蚊子可终生具有传染性，野鸟感染本病毒后常无明显症状，但出现不同程度的病毒血症，并达到能感染蚊虫的水平，一般可持续2~5天。',
+symbolSize:30,
+category:15,
+des:'传染性:无人与人之间直接传播，蚊子可终生具有传染性，野鸟感染本病毒后常<br>无明显症状，但出现不同程度的病毒血症，并达到能感染蚊虫的水平，一般可持<br>续2~5天。',
+},
+{
+id:"50",
+name:'是',
+symbolSize:30,
+category:16,
+des:'是否人兽共患病:是',
+},
+{
+id:"51",
+name:'未见相关报道',
+symbolSize:30,
+category:17,
+des:'药物敏感性:未见相关报道',
+},
+{
+id:"52",
+name:'不适用',
+symbolSize:30,
+category:18,
+des:'耐药性:不适用',
+},
+{
+id:"53",
+name:'1%次氯酸钠、2%戊二醛、甲醛及70%乙醇可灭活。对氯仿、乙醚、去氧胆盐等脂溶剂敏感。对酸敏感、对胰酶、胰凝乳蛋白酶、番木瓜酶不敏感。',
+symbolSize:30,
+category:19,
+des:'消毒剂敏感性:1%次氯酸钠、2%戊二醛、甲醛及70%乙醇可灭活。对氯仿<br>、乙醚、去氧胆盐等脂溶剂敏感。对酸敏感、对胰酶、胰凝乳蛋白酶、番木瓜酶<br>不敏感。',
+},
+{
+id:"54",
+name:'60℃加热10~30min可灭活。对紫外线敏感。高压灭菌是灭活所有病毒最有效和最可靠的方法。',
+symbolSize:30,
+category:20,
+des:'物理灭活性:60℃加热10~30min可灭活。对紫外线敏感。高压灭菌是<br>灭活所有病毒最有效和最可靠的方法。',
+},
+{
+id:"55",
+name:'目前无有效治疗药物。如出现脑膜炎、脑炎或脑膜脑炎等症状入院，进行对症治疗。',
+symbolSize:30,
+category:21,
+des:'紧急治疗:目前无有效治疗药物。如出现脑膜炎、脑炎或脑膜脑炎等症状入院，<br>进行对症治疗。',
+},
+{
+id:"57",
+name:'无相关报道',
+symbolSize:30,
+category:23,
+des:'获得性感染事件记录:无相关报道',
+},
+{
+id:"58",
+name:'《高致病性病原微生物材料安全数据单》',
+symbolSize:30,
+category:24,
+des:'参考书籍:《高致病性病原微生物材料安全数据单》',
+},
+{
+id:"59",
+name:'东方马脑炎病毒是披膜病毒科甲病毒属的一种。病毒颗粒为圆形，直径约50~70nm，含有一个电子密度高的核心，衣壳呈二十面体对称，并有32个多角形的亚单位，脂蛋白外膜有表面凸起，长约10nm，核衣壳直径约25~30nm。东方马脑炎病毒属成员均具有相同的A抗原，各病毒株之间仅存在细微的抗原差异，但在实验室内经多次传代之后，这种抗原差异可以消失。血凝(HA)、血凝抑制(HI)和补体结合(CF)试验各成员间呈交叉反应，因此各病毒型间的区别主要依靠中和试验(动物和细胞中和试验)。',
+symbolSize:30,
+category:25,
+des:'生物学特性:东方马脑炎病毒是披膜病毒科甲病毒属的一种。病毒颗粒为圆形，<br>直径约50~70nm，含有一个电子密度高的核心，衣壳呈二十面体对称，并<br>有32个多角形的亚单位，脂蛋白外膜有表面凸起，长约10nm，核衣壳直径<br>约25~30nm。东方马脑炎病毒属成员均具有相同的A抗原，各病毒株之间<br>仅存在细微的抗原差异，但在实验室内经多次传代之后，这种抗原差异可以消失<br>。血凝(HA)、血凝抑制(HI)和补体结合(CF)试验各成员间呈交叉反<br>应，因此各病毒型间的区别主要依靠中和试验(动物和细胞中和试验)。',
+},
+{
+id:"60",
+name:'本病典型的临床经过可分为两个阶段，即初热期和极期。起病急、发病快、潜伏期短，出现高热、严重头痛、颈项强直、呕吐、昏睡、昏迷和惊厥等脑炎症状，并迅速发展而致死，尤其是年幼儿童。',
+symbolSize:30,
+category:26,
+des:'致病性:本病典型的临床经过可分为两个阶段，即初热期和极期。起病急、发病<br>快、潜伏期短，出现高热、严重头痛、颈项强直、呕吐、昏睡、昏迷和惊厥等脑<br>炎症状，并迅速发展而致死，尤其是年幼儿童。',
+},
+{
+id:"61",
+name:'东方马脑炎病毒于1933年首先发现在美国东部的马场内，从病马脑组织中分离。1938年从病人脑组织中也分离出同样病毒，其引起的人类脑炎症状十分凶险。东方马脑炎主要分布在美洲，如美国的东部、东北部及南部的几个洲；加拿大的东部和墨西哥、巴拿马、哥伦比亚、巴西、阿根廷和古巴等国均有本病的疫源地存在。此外，东南亚的菲律宾、泰国，以及我国的新疆地区，也有从动物中分离到东方马脑炎病毒的记载，但未见病例报告。',
+symbolSize:30,
+category:27,
+des:'流行病学:东方马脑炎病毒于1933年首先发现在美国东部的马场内，从病马<br>脑组织中分离。1938年从病人脑组织中也分离出同样病毒，其引起的人类脑<br>炎症状十分凶险。东方马脑炎主要分布在美洲，如美国的东部、东北部及南部的<br>几个洲；加拿大的东部和墨西哥、巴拿马、哥伦比亚、巴西、阿根廷和古巴等国<br>均有本病的疫源地存在。此外，东南亚的菲律宾、泰国，以及我国的新疆地区，<br>也有从动物中分离到东方马脑炎病毒的记载，但未见病例报告。',
+},
+{
+id:"62",
+name:'东方马脑炎病毒的主要贮存宿主是鸟类，其次是家畜、家禽和各种野生动物。曾从马、驴、骡、绵羊、猪、鸡、鸭、鹅、鹿、野鸡、麻雀及啮齿类、两栖类和爬行类动物体内分离出病毒。人被认为是东方马脑炎病毒的终点宿主。',
+symbolSize:30,
+category:28,
+des:'宿主范围:东方马脑炎病毒的主要贮存宿主是鸟类，其次是家畜、家禽和各种野<br>生动物。曾从马、驴、骡、绵羊、猪、鸡、鸭、鹅、鹿、野鸡、麻雀及啮齿类、<br>两栖类和爬行类动物体内分离出病毒。人被认为是东方马脑炎病毒的终点宿主。',
+},
+{
+id:"63",
+name:'蛋白质溶液对该病毒有保护作用，在0.1%胱氨酸盐豚鼠血清中，于4℃下该病毒可存活10年以上。在pH7.0~8.0条件下该病毒抗原性稳定。能耐受低温保存，冷冻干燥后真空保存活力维持5~0年以上。置-70℃和-196℃能较长时间保持病毒活力；若在-10℃保存，一般不超过1个月，在50％中性甘油盐水中亦可较好地保存活力。',
+symbolSize:30,
+category:29,
+des:'宿主外存活性:蛋白质溶液对该病毒有保护作用，在0.1%胱氨酸盐豚鼠血清<br>中，于4℃下该病毒可存活10年以上。在pH7.0~8.0条件下该病毒抗<br>原性稳定。能耐受低温保存，冷冻干燥后真空保存活力维持5~0年以上。置-<br>70℃和-196℃能较长时间保持病毒活力；若在-10℃保存，一般不超过<br>1个月，在50％中性甘油盐水中亦可较好地保存活力。',
+},
+{
+id:"64",
+name:'为单股正链RNA病毒，其基因组全长为11675bp，其5’端具有帽子结构，3’端具有PolyA尾结构。其碱基组成为腺嘌呤(A)29%，尿嘧啶(U)20%~22%，鸟嘌呤(G)25%，胞嘧啶(C)25%。',
+symbolSize:30,
+category:30,
+des:'基因组信息:为单股正链RNA病毒，其基因组全长为11675bp，其5’<br>端具有帽子结构，3’端具有PolyA尾结构。其碱基组成为腺嘌呤(A)2<br>9%，尿嘧啶(U)20%~22%，鸟嘌呤(G)25%，胞嘧啶(C)25<br>%。',
+},
+{
+id:"65",
+name:'BSL-2',
+symbolSize:30,
+category:31,
+des:'灭活材料的操作:BSL-2',
+},
+{
+id:"66",
+name:'披膜病毒科',
+symbolSize:30,
+category:32,
+des:'分类学地位:披膜病毒科',
+},
+{
+id:"67",
+name:'人',
+symbolSize:30,
+category:33,
+des:'终末宿主:人',
+},
+{
+id:"68",
+name:'埃博拉病毒',
+symbolSize:70,
+category:0,
+des:'病毒:埃博拉病毒',
+},
+{
+id:"69",
+name:'Ebolavirus',
+symbolSize:30,
+category:2,
+des:'英文名称:Ebolavirus',
+},
+{
+id:"71",
+name:'第一类',
+symbolSize:30,
+category:4,
+des:'危害程度分类:第一类',
+},
+{
+id:"72",
+name:'BSL-4',
+symbolSize:30,
+category:5,
+des:'病毒培养所需生物安全级别:BSL-4',
+},
+{
+id:"73",
+name:'ABSL-4',
+symbolSize:30,
+category:6,
+des:'动物实验所需生物安全级别:ABSL-4',
+},
+{
+id:"74",
+name:'BSL-3',
+symbolSize:30,
+category:7,
+des:'未经培养的感染材料的操作:BSL-3',
+},
+{
+id:"75",
+name:'A/UN2814',
+symbolSize:30,
+category:8,
+des:'运输包装分类:A/UN2814',
+},
+{
+id:"76",
+name:'非洲出血热、埃博拉出血热(EHF)、埃博拉病、EBO、扎伊尔亚型、苏丹亚型、菜斯顿亚型、科特迪瓦亚型。',
+symbolSize:30,
+category:9,
+des:'同义词:非洲出血热、埃博拉出血热(EHF)、埃博拉病、EBO、扎伊尔亚<br>型、苏丹亚型、菜斯顿亚型、科特迪瓦亚型。',
+},
+{
+id:"77",
+name:'人类、非灵长类动物及蝙蝠。',
+symbolSize:30,
+category:10,
+des:'自然宿主:人类、非灵长类动物及蝙蝠。',
+},
+{
+id:"79",
+name:'感染1~10个病毒颗粒即可引起疾病。',
+symbolSize:30,
+category:12,
+des:'感染剂量:感染1~10个病毒颗粒即可引起疾病。',
+},
+{
+id:"80",
+name:'该病毒能够导致非灵长类动物发病,因此可能通过这些动物传播病。',
+symbolSize:30,
+category:13,
+des:'传播途径:该病毒能够导致非灵长类动物发病,因此可能通过这些动物传播病。',
+},
+{
+id:"81",
+name:'潜伏期:潜伏期2～21天,一般为5～12天。',
+symbolSize:30,
+category:14,
+des:'潜伏期:潜伏期:潜伏期2～21天,一般为5～12天。',
+},
+{
+id:"82",
+name:'病毒传染性强,在发病3周后可在患者血液中检测到病原。一位埃博拉出血热患者发病后第39天、61天,甚至第101天的精液中均检测到病毒，传染过程尚不清楚。',
+symbolSize:30,
+category:15,
+des:'传染性:病毒传染性强,在发病3周后可在患者血液中检测到病原。一位埃博拉<br>出血热患者发病后第39天、61天,甚至第101天的精液中均检测到病毒，<br>传染过程尚不清楚。',
+},
+{
+id:"83",
+name:'是',
+symbolSize:30,
+category:16,
+des:'是否人兽共患病:是',
+},
+{
+id:"84",
+name:'尚无敏感特异性药物',
+symbolSize:30,
+category:17,
+des:'药物敏感性:尚无敏感特异性药物',
+},
+{
+id:"85",
+name:'不适用',
+symbolSize:30,
+category:18,
+des:'耐药性:不适用',
+},
+{
+id:"86",
+name:'紫外线、γ射线、甲醛、次氯酸、酚类消毒剂和脂溶剂均可灭活病毒,曲拉通X-100(TritonX-100)能极大地降低病毒的感染性,使用03%奎尼丁在37℃30min条件下可以灭活病毒。',
+symbolSize:30,
+category:19,
+des:'消毒剂敏感性:紫外线、γ射线、甲醛、次氯酸、酚类消毒剂和脂溶剂均可灭活<br>病毒,曲拉通X-100(TritonX-100)能极大地降低病毒的感染<br>性,使用03%奎尼丁在37℃30min条件下可以灭活病毒。',
+},
+{
+id:"87",
+name:'对紫外线照射敏感。60℃加热1h能使样本失去感染染。2x10^4戈瑞的γ射线照射可以灭活血清样本。',
+symbolSize:30,
+category:20,
+des:'物理灭活性:对紫外线照射敏感。60℃加热1h能使样本失去感染染。2x1<br>0^4戈瑞的γ射线照射可以灭活血清样本。',
+},
+{
+id:"88",
+name:'无特效治疗措施,主要为对症和支持治疗,注意水、电解质平衡,预防和控制出血,控制继发感染,治疗肾功能衰竭和出血，DIC等并发症。',
+symbolSize:30,
+category:21,
+des:'紧急治疗:无特效治疗措施,主要为对症和支持治疗,注意水、电解质平衡,预<br>防和控制出血,控制继发感染,治疗肾功能衰竭和出血，DIC等并发症。',
+},
+{
+id:"90",
+name:'实验室感染事件:截至2004年共有3例实验室感染事件,分别发生在英格兰、瑞士和俄罗斯。',
+symbolSize:30,
+category:23,
+des:'获得性感染事件记录:实验室感染事件:截至2004年共有3例实验室感染事<br>件,分别发生在英格兰、瑞士和俄罗斯。',
+},
+{
+id:"91",
+name:'《高致病性病原微生物材料安全数据单》',
+symbolSize:30,
+category:24,
+des:'参考书籍:《高致病性病原微生物材料安全数据单》',
+},
+{
+id:"92",
+name:'病毒有囊膜,病毒颗粒很大,直径为80nm,典型长度为790~-970nm,最长可达14000nm。多形性,可呈分枝状、环状和“6”字形。',
+symbolSize:30,
+category:25,
+des:'生物学特性:病毒有囊膜,病毒颗粒很大,直径为80nm,典型长度为790<br>~-970nm,最长可达14000nm。多形性,可呈分枝状、环状和“6<br>”字形。',
+},
+{
+id:"93",
+name:'致病性:EBOV是人类最强的致病原之一,5~7天内可导致70%-80%患者死亡。急性起病,临床表现为高热、畏寒、头痛、肌痛、恶心、结膜充血及相对缓脉。2-3天后可有呕吐、腹痛、腹泻、血便等表现,半数患者有咽痛及咳嗽。病后4-5天进入极期,患者可出现神志改变,如谵妄、嗜睡等,重症患者在发病数日可出现咯血,鼻、口腔、结膜下、胃肠道、阴道及皮肤出血或血尿,在病程第5~7天可出现麻疹样皮疹,数天后皮疹消退并脱屑,部分患者可较长期留有皮肤改变,第10病日为出血高峰,50%以上患者出现严重出血,并可因出血、肝肾功能衰竭及致死性并发症而死亡。90%的死亡患者在发病后12天内死亡(7-14天)。非重症者,发病后2周内恢复，病人最显著的表现为低血压、休克和面部水肿,还可出现弥散性血管内凝血(DIC)、电解质和酸碱平衡失调等。',
+symbolSize:30,
+category:26,
+des:'致病性:致病性:EBOV是人类最强的致病原之一,5~7天内可导致70%<br>-80%患者死亡。急性起病,临床表现为高热、畏寒、头痛、肌痛、恶心、结<br>膜充血及相对缓脉。2-3天后可有呕吐、腹痛、腹泻、血便等表现,半数患者<br>有咽痛及咳嗽。病后4-5天进入极期,患者可出现神志改变,如谵妄、嗜睡等<br>,重症患者在发病数日可出现咯血,鼻、口腔、结膜下、胃肠道、阴道及皮肤出<br>血或血尿,在病程第5~7天可出现麻疹样皮疹,数天后皮疹消退并脱屑,部分<br>患者可较长期留有皮肤改变,第10病日为出血高峰,50%以上患者出现严重<br>出血,并可因出血、肝肾功能衰竭及致死性并发症而死亡。90%的死亡患者在<br>发病后12天内死亡(7-14天)。非重症者,发病后2周内恢复，病人最显<br>著的表现为低血压、休克和面部水肿,还可出现弥散性血管内凝血(DIC)、<br>电解质和酸碱平衡失调等。',
+},
+{
+id:"94",
+name:'来自于疫区，或3周内有疫区旅行史，或有与病人、感染动物接触史',
+symbolSize:30,
+category:27,
+des:'流行病学:来自于疫区，或3周内有疫区旅行史，或有与病人、感染动物接触史',
+},
+{
+id:"95",
+name:'人类、非灵长类动物及蝙蝠。',
+symbolSize:30,
+category:28,
+des:'宿主范围:人类、非灵长类动物及蝙蝠。',
+},
+{
+id:"96",
+name:'病毒在血液标本中室温条件下可以存活数周,干燥条件下体外存活时间不长。在尸体中可以存活数周',
+symbolSize:30,
+category:29,
+des:'宿主外存活性:病毒在血液标本中室温条件下可以存活数周,干燥条件下体外存<br>活时间不长。在尸体中可以存活数周',
+},
+{
+id:"97",
+name:'病毒基因组为单股负链RNA,全长19.1kb,螺旋状核衣壳。',
+symbolSize:30,
+category:30,
+des:'基因组信息:病毒基因组为单股负链RNA,全长19.1kb,螺旋状核衣壳<br>。',
+},
+{
+id:"98",
+name:'BSL-2',
+symbolSize:30,
+category:31,
+des:'灭活材料的操作:BSL-2',
+},
+{
+id:"99",
+name:'丝状病毒科',
+symbolSize:30,
+category:32,
+des:'分类学地位:丝状病毒科',
+}],
+links: [
+{
+source:"2",
+target:"0",
+},
+{
+source:"3",
+target:"2",
+},
+{
+source:"5",
+target:"2",
+},
+{
+source:"6",
+target:"2",
+},
+{
+source:"7",
+target:"2",
+},
+{
+source:"8",
+target:"2",
+},
+{
+source:"9",
+target:"2",
+},
+{
+source:"32",
+target:"2",
+},
+{
+source:"33",
+target:"2",
+},
+{
+source:"35",
+target:"0",
+},
+{
+source:"36",
+target:"35",
+},
+{
+source:"38",
+target:"35",
+},
+{
+source:"39",
+target:"35",
+},
+{
+source:"40",
+target:"35",
+},
+{
+source:"41",
+target:"35",
+},
+{
+source:"42",
+target:"35",
+},
+{
+source:"43",
+target:"35",
+},
+{
+source:"44",
+target:"35",
+},
+{
+source:"45",
+target:"35",
+},
+{
+source:"46",
+target:"35",
+},
+{
+source:"47",
+target:"35",
+},
+{
+source:"48",
+target:"35",
+},
+{
+source:"49",
+target:"35",
+},
+{
+source:"50",
+target:"35",
+},
+{
+source:"51",
+target:"35",
+},
+{
+source:"52",
+target:"35",
+},
+{
+source:"53",
+target:"35",
+},
+{
+source:"54",
+target:"35",
+},
+{
+source:"55",
+target:"35",
+},
+{
+source:"57",
+target:"35",
+},
+{
+source:"58",
+target:"35",
+},
+{
+source:"59",
+target:"35",
+},
+{
+source:"60",
+target:"35",
+},
+{
+source:"61",
+target:"35",
+},
+{
+source:"62",
+target:"35",
+},
+{
+source:"63",
+target:"35",
+},
+{
+source:"64",
+target:"35",
+},
+{
+source:"65",
+target:"35",
+},
+{
+source:"66",
+target:"35",
+},
+{
+source:"67",
+target:"35",
+},
+{
+source:"68",
+target:"0",
+},
+{
+source:"69",
+target:"68",
+},
+{
+source:"71",
+target:"68",
+},
+{
+source:"72",
+target:"68",
+},
+{
+source:"73",
+target:"68",
+},
+{
+source:"74",
+target:"68",
+},
+{
+source:"75",
+target:"68",
+},
+{
+source:"76",
+target:"68",
+},
+{
+source:"77",
+target:"68",
+},
+{
+source:"79",
+target:"68",
+},
+{
+source:"80",
+target:"68",
+},
+{
+source:"81",
+target:"68",
+},
+{
+source:"82",
+target:"68",
+},
+{
+source:"83",
+target:"68",
+},
+{
+source:"84",
+target:"68",
+},
+{
+source:"85",
+target:"68",
+},
+{
+source:"86",
+target:"68",
+},
+{
+source:"87",
+target:"68",
+},
+{
+source:"88",
+target:"68",
+},
+{
+source:"90",
+target:"68",
+},
+{
+source:"91",
+target:"68",
+},
+{
+source:"92",
+target:"68",
+},
+{
+source:"93",
+target:"68",
+},
+{
+source:"94",
+target:"68",
+},
+{
+source:"95",
+target:"68",
+},
+{
+source:"96",
+target:"68",
+},
+{
+source:"97",
+target:"68",
+},
+{
+source:"98",
+target:"68",
+},
+{
+source:"99",
+target:"68",
+}],
+
+
+
+  
+            categories: categories,
+        }]
+    };
+
+myChart.on('mouseup',function(params){
+var option=myChart.getOption();
+option.series[0].data[params.dataIndex].x=params.event.offsetX;
+option.series[0].data[params.dataIndex].y=params.event.offsetY;
+option.series[0].data[params.dataIndex].fixed=true;
+myChart.setOption(option);
+});
+myChart.on('click',function(params){
+var option=myChart.getOption();
+option.series[0].data[params.dataIndex].x=params.event.offsetX;
+option.series[0].data[params.dataIndex].y=params.event.offsetY;
+option.series[0].data[params.dataIndex].fixed=false;
+myChart.setOption(option);
+});
+
+
+
+    myChart.setOption(option);
+</script>
+
+</body>
+</html>
