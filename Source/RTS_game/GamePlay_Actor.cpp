@@ -25,7 +25,7 @@ bool AGamePlay_Actor::general_policy_func(bool active, int increase_rate_inc)
 void AGamePlay_Actor::BeginPlay()
 {
 	Super::BeginPlay();
-	policy_point = 100;
+	//policy_point = 100;
 	increase_rate = 60;
 	count = 0;	
 }
@@ -34,12 +34,5 @@ void AGamePlay_Actor::BeginPlay()
 void AGamePlay_Actor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	count++;
-	if (count%increase_rate)
-	{
-		policy_point++;
-		count = 0;
-	}
-
 }
 
