@@ -13,8 +13,8 @@ class RTS_GAME_API AGamePlay_Actor : public AActor
 		//UPROPERTY(EditAnywhere, BlueprintReadWrite,Category = status)
 		//UFUNCTION(BlueprintCallable, Category = MyFunc)
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = status)
-	int policy_point;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = status)
+	//int policy_point;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = status)
 	int increase_rate; //该值越小，policy_point增加速率越快
 private:
