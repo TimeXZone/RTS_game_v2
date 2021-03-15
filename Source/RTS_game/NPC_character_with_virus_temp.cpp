@@ -29,7 +29,7 @@ int ANPC_character_with_virus_temp::check_func(float percent, int db)
 {
 	SYSTEMTIME st = { 0 };
 	GetLocalTime(&st);
-	int seed = st.wYear * 3 + st.wMonth * 2 + st.wHour + st.wMinute + st.wSecond;
+	int seed = st.wYear * 3 + st.wMonth * 2 + st.wHour + st.wMinute + st.wSecond + st.wMilliseconds;
 	srand(seed);
 	int r_1 = rand() % 10; //求出个位的值
 	int r_10;
