@@ -58,6 +58,8 @@ body{
         // 图的标题
         title: {
         },
+		color:['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3','#995959','#404A26','#689696','#A5C1B2','#52269D','#B6B5D3','#DC64BF','#ECADBF','#4DF1CE','#0C792D','#BCED38',
+		'#F1E957','#F1C465','#F08747','#F16B49','#621316','#68376F','#919C87','#FECEB4'],
         // 提示框的配置
         tooltip: {
             formatter: function (x) {
@@ -85,10 +87,6 @@ body{
                 restore: {
                     show: true
                 },
-                // 保存为图片
-                saveAsImage: {
-                    show: true
-                }
             }
         },
         legend: [{
@@ -98,7 +96,6 @@ body{
             }),
 			selected:{
 			"英文名称":false,
-			"类型":false,
 			"危害程度分类":false,
 			"同义词":false,
 			"自然宿主":false,
@@ -123,9 +120,13 @@ body{
 			"基因组信息":false,
 			"分类学地位":false,
 			"终末宿主":false,
+			},
+			type: 'scroll', //分页类型
+			top: 10,
+			textStyle:{
+                color:"#fff"
+            }
 
-
-}
         }],
         series: [{
             type: 'graph', // 类型:关系图
@@ -181,14 +182,14 @@ id:"0",
 name:'病毒',
 des:'病毒',
 symbolSize:100,
-category:0,
+category:3,
 },
 {
 id:"1",
 name:'细菌、放线菌、螺旋体等',
 des:'细菌、放线菌、螺旋体等',
 symbolSize:100,
-category:1,
+category:3,
 },
 {
 id:"2",
