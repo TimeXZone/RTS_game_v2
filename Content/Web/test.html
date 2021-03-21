@@ -122,12 +122,17 @@ body{
 			"终末宿主":false,
 			},
 			type: 'scroll', //分页类型
+			pageIconColor: '#fff', //翻页下一页的三角按钮颜色
+			pageIconInactiveColor: '#aaa', //翻页（即翻页到头时）
+			pageTextStyle:{
+                color:"#fff"
+            },
 			top: 10,
 			textStyle:{
                 color:"#fff"
             }
-
         }],
+
         series: [{
             type: 'graph', // 类型:关系图
             layout: 'force', //图的布局，类型为力导图
