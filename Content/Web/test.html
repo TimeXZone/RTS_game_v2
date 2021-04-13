@@ -125,44 +125,40 @@ body{
 			pageIconColor: '#fff', //翻页下一页的三角按钮颜色
 			pageIconInactiveColor: '#aaa', //翻页（即翻页到头时）
 			pageTextStyle:{
-                color:"#fff"
+                color:"#fff"//分页处文字颜色设置
             },
-			top: 10,
+			top: 10,//图例显示位置在距离上方10大小的位置处
 			textStyle:{
-                color:"#fff"
+                color:"#fff"//图例文字颜色设置
             }
         }],
-
         series: [{
             type: 'graph', // 类型:关系图
             layout: 'force', //图的布局，类型为力导图
             symbolSize: 40, // 调整节点的大小
             roam: true, // 是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移,可以设置成 'scale' 或者 'move'。设置成 true 为都开启
-            edgeSymbol: ['circle', 'circle'],
-            edgeSymbolSize: 1,
+            edgeSymbol: ['circle', 'circle'],//结点连线的端点标志类型
+            edgeSymbolSize: 1,//结点连线的端点标志大小
             edgeLabel: {
                 normal: {
-					show:false
+					show:false//不显示结点连线的名称
                 }
             },
             force: {
-                repulsion: 200,
+                repulsion: 200,//斥力
 				gravity: 0.05,
                 edgeLength: [100, 150]
             },
-            draggable: true,
+            draggable: true,//结点是否可拖动
             lineStyle: {
                 normal: {
-                    width: 1,
-                    color: '#4b565b',
+                    width: 1,//连线宽度
+                    color: '#4b565b',//连线颜色
                 }
             },
             edgeLabel: {
                 normal: {
                     show: false,
-                    formatter: function (x) {
-                        return x.data.name;
-                    }
                 }
             },
             label: {
@@ -170,7 +166,7 @@ body{
                     show: true,
                     formatter: function(value) {
                                  var res = value.data.name;
-                                if(res.length > 5) {
+                                if(res.length > 5) {//当结点名称字数>5时，缩略显示结点名称
                                      res = res.substring(0, 4) + "..";
                                  }
                                  return res;
@@ -179,8 +175,6 @@ body{
             },
  
             // 数据
-
-
 data:[
 {
 id:"0",
